@@ -3,12 +3,10 @@ Lua script to manipulate MySQL SELECT results
 
 # Usage
 
-Modify the file _rules.lua_ and copy it `$MYSQL_PROXY_ROOT/lib/mysql-proxy/lua`, where `$MYSQL_PROXY_ROOT` is the root folder for the MySQL Proxy application.
-
-Start the proxy with
+Modify the file _rules.lua_ then start the proxy with
 
 ```shell
-mysql-proxy --proxy-lua=path/to/obfuscator.lua
+mysql-proxy --proxy-lua=path/to/obfuscator.lua --lua-path=path/to/myobfuscator/?.lua
 ```
 
 # rules.lua
@@ -24,7 +22,7 @@ Then create a function for each column that requires obfuscation in that table's
 
 ```lua
 -- Function to change the data for column email in users table
-function users.email(original_value)
+function users.email(originalValue)
   return "user@example.com"
 end
 ```
@@ -40,3 +38,13 @@ end
 ```
 
 Any column specific funcion is called **after** the `__row__`, so they can change the data again.
+
+### Randomization
+
+To make the random values repeatable (two clients running the same query will receive the same response) just fix the seed, or comment/remove the line
+
+```lua
+math.randomseed(os.time())
+```
+
+in the _rules.lua_ file.
