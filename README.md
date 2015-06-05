@@ -6,7 +6,7 @@ Lua script to manipulate MySQL SELECT results
 Modify the file _rules.lua_ then start the proxy with
 
 ```shell
-mysql-proxy --proxy-lua=path/to/obfuscator.lua --lua-path=path/to/myobfuscator/?.lua
+mysql-proxy --proxy-lua-script=path/to/obfuscator.lua --lua-path=path/to/myobfuscator/?.lua
 ```
 
 # How it works
