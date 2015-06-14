@@ -36,7 +36,7 @@ function read_query_result(inj)
     end
 
     for k = 1, #fields do
-      if row[k] ~= nil and modTable[fields[k].name] then
+      if modTable[fields[k].name] then
         row[k] = modTable[fields[k].name](row[k])
       end
     end
